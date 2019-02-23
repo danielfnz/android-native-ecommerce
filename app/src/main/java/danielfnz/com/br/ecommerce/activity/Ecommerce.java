@@ -7,7 +7,11 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,29 +22,35 @@ import danielfnz.com.br.ecommerce.model.Produto;
 import danielfnz.com.br.ecommerce.service.ProdutoService;
 
 public class Ecommerce extends Activity {
-
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ecommerce);
 
-        ProdutoService produtoList = new ProdutoService();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
+        ProdutoService produtoService = new ProdutoService(firebaseDatabase, databaseReference);
 
         ListView lista = (ListView) findViewById(R.id.lista);
-        List<Produto> produtos = produtoList.getProdutosList();
+        List<Produto> produtos = produtoService.getProdutosList();
 
-        ProdutoAdapter adapter =  new ProdutoAdapter(this, (ArrayList<Produto>) produtos);
-        lista.setAdapter(adapter);
-
-        lista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = (Integer) view.getTag();
-
-                Intent i = new Intent(view.getContext(), ProductDescription.class);
-                startActivity(i);
-            }
-        });
+        if(produtos.isEmpty()) {
+            View empty = findViewById(R.id.list_empty);
+            lista.setEmptyView(empty);
+        } else {
+            ProdutoAdapter adapter =  new ProdutoAdapter(this, (ArrayList<Produto>) produtos);
+            lista.setAdapter(adapter);
+            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent i = new Intent(view.getContext(), ProductDescription.class);
+                    startActivity(i);
+                }
+            });
+        }
     }
 }

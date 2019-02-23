@@ -26,7 +26,7 @@
         <activity
             android:name=".activity.ProductDescription"
             android:label="@string/title_activity_product_description"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
