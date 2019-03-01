@@ -1,5 +1,8 @@
 package danielfnz.com.br.ecommerce.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Random;
 import java.util.UUID;
 
@@ -7,7 +10,7 @@ import java.util.UUID;
  * Created by Alunoinf_2 on 02/02/2019.
  */
 
-public class Produto {
+public class Produto implements Parcelable {
     private String id;
     private String nome;
     private double preco;
@@ -27,6 +30,27 @@ public class Produto {
         this.imagem = imagem;
         this.descrição = descrição;
     }
+
+    protected Produto(Parcel in) {
+        id = in.readString();
+        nome = in.readString();
+        preco = in.readDouble();
+        quantidade = in.readInt();
+        imagem = in.readInt();
+        descrição = in.readString();
+    }
+
+    public static final Creator<Produto> CREATOR = new Creator<Produto>() {
+        @Override
+        public Produto createFromParcel(Parcel in) {
+            return new Produto(in);
+        }
+
+        @Override
+        public Produto[] newArray(int size) {
+            return new Produto[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -75,4 +99,21 @@ public class Produto {
     public void setDescrição(String descrição) {
         this.descrição = descrição;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(nome);
+        parcel.writeDouble(preco);
+        parcel.writeInt(quantidade);
+        parcel.writeInt(imagem);
+        parcel.writeString(descrição);
+    }
+
+
 }

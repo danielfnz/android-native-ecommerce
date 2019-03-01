@@ -8,6 +8,12 @@
     android:layout_height="fill_parent"
     tools:context="danielfnz.com.br.ecommerce.activity.Ecommerce">
 
+    <Button
+        android:id="@+id/botao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="click"/>
+
     <ListView
         android:id="@+id/lista"
         android:layout_width="wrap_content"
