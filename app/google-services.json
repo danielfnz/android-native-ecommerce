@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "906289639235-iqi153l4l7gmgjljqijklbk3c3a5all9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "danielfnz.com.br.androidfirebase",
+            "certificate_hash": "4e567d41c06850f480ceac97bba2920dbf67450a"
+          }
+        },
+        {
           "client_id": "906289639235-m933i81ic0gb9rodfm84b72ga3u9biko.apps.googleusercontent.com",
           "client_type": 3
         }

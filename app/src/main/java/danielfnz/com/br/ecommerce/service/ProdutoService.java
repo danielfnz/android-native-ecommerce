@@ -1,6 +1,7 @@
 package danielfnz.com.br.ecommerce.service;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -61,14 +62,14 @@ public class ProdutoService {
         });
     }
 
-/*    public void gerarProdutos() {
-        this.addProduto(new Produto("ALFACE CRESPA VERDE ORGÂNICA", 2.5, 50, R.drawable.alface, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
-        this.addProduto(new Produto("ABÓBORA JAPONESA ORGÂNICA 600G", 3.5, 50, R.drawable.abobora1, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
-        this.addProduto(new Produto("ABÓBORA BRASILEIROA ORGÂNICA 600G", 2.5, 50, R.drawable.abobora2, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
-        this.addProduto(new Produto("AGRIÃO ORGÂNICO", 2.5, 50, R.drawable.agriao, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
-        this.addProduto(new Produto("BANANA PRATA ORGÂNICA", 2.5, 50, R.drawable.banana, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
-        this.addProduto(new Produto("BERINjELA ORGÂNICA", 2.5, 50, R.drawable.berinjela, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
-    }*/
+   public void gerarProdutos() {
+//        this.addProduto(new Produto("ALFACE CRESPA VERDE ORGÂNICA", 2.5, 50, R.drawable.alface, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
+//        this.addProduto(new Produto("ABÓBORA JAPONESA ORGÂNICA 600G", 3.5, 50, R.drawable.abobora1, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
+//        this.addProduto(new Produto("ABÓBORA BRASILEIROA ORGÂNICA 600G", 2.5, 50, R.drawable.abobora2, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
+//        this.addProduto(new Produto("AGRIÃO ORGÂNICO", 2.5, 50, R.drawable.agriao, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
+//        this.addProduto(new Produto("BANANA PRATA ORGÂNICA", 2.5, 50, R.drawable.banana, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
+//        this.addProduto(new Produto("TOMATE ORGANICO", 5.0, 50, R.drawable.tomate, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur culpa deleniti, eaque eligendi est ipsum sed. Ab enim fugiat laudantium quaerat, quis reiciendis reprehenderit saepe suscipit voluptates. Dignissimos, nesciunt! "));
+    }
 
     public void addProduto(Produto produto) {
         databaseReference.child("produtos").child(produto.getId()).setValue(produto);

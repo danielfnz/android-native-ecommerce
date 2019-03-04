@@ -44,9 +44,9 @@ public class ProductDescription extends AppCompatActivity {
         imagem.setImageResource(produto.getImagem());
         preco.setText(new StringBuilder(CIFRA_DINHEIRO).append(formataVirgula(produto.getPreco())));
         quantidade.setText(String.valueOf(produto.getQuantidade()));
-        nome.setText(produto.getNome());
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+//        nome.setText(produto.getNome());
+//
+         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorPrimary));
         tabLayout.addTab(tabLayout.newTab().setText("COMPRAR"));
         tabLayout.addTab(tabLayout.newTab().setText("DESCRICAO"));
