@@ -8,23 +8,24 @@ import android.support.v4.app.FragmentPagerAdapter;
 import danielfnz.com.br.ecommerce.fragment.CompraProdutoDescricaoFragment;
 import danielfnz.com.br.ecommerce.fragment.DetalheProdutoDescricaoFragment;
 import danielfnz.com.br.ecommerce.model.Produto;
+import danielfnz.com.br.ecommerce.model.ProdutoParcel;
 
 public class DescricaoProdutoPageAdapter extends FragmentPagerAdapter {
 
     int numberOfTabs;
-    Produto produto;
+    ProdutoParcel produtoParcel;
 
-    public DescricaoProdutoPageAdapter(FragmentManager fm, int numberOfTabs, Produto produto) {
+    public DescricaoProdutoPageAdapter(FragmentManager fm, int numberOfTabs, ProdutoParcel produtoParcel) {
         super(fm);
         this.numberOfTabs = numberOfTabs;
-        this.produto = produto;
+        this.produtoParcel = produtoParcel;
     }
 
     @Override
     public Fragment getItem(int i) {
         Fragment page;
         Bundle bundle = new Bundle();
-        bundle.putParcelable("produto", produto);
+        bundle.putParcelable("produto", produtoParcel);
         switch (i) {
             case 0:
                 page = new CompraProdutoDescricaoFragment();

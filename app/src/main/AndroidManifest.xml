@@ -3,6 +3,7 @@
     package="danielfnz.com.br.ecommerce">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_compras"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ScannerActivity"></activity>
+        <activity android:name=".activity.CompraEfetuadaActivity"></activity>
+
+        <activity android:name=".activity.CarrinhoActivity" />
+        <activity android:name=".activity.ScannerActivity" />
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"

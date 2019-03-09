@@ -1,56 +1,45 @@
 package danielfnz.com.br.ecommerce.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.util.Random;
 import java.util.UUID;
 
 /**
  * Created by Alunoinf_2 on 02/02/2019.
  */
 
-public class Produto implements Parcelable {
+public class Produto {
+
     private String id;
     private String nome;
     private double preco;
     private int quantidade;
     private int imagem;
-    private String descrição;
+    private String descricao;
+    private String codigoBarras;
 
     public Produto() {
 
     }
 
-    public Produto(String nome, double preco, int quantidade, int imagem, String descrição) {
+    public Produto(String id, String nome, double preco, int quantidade, int imagem, String descricao, String codigoBarras) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.imagem = imagem;
+        this.descricao = descricao;
+        this.codigoBarras = codigoBarras;
+    }
+
+    public Produto(String nome, double preco, int quantidade, int imagem, String descricao, String codigoBarras) {
+        this.codigoBarras = codigoBarras;
         this.id = UUID.randomUUID().toString();
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
         this.imagem = imagem;
-        this.descrição = descrição;
+        this.descricao = descricao;
     }
 
-    protected Produto(Parcel in) {
-        id = in.readString();
-        nome = in.readString();
-        preco = in.readDouble();
-        quantidade = in.readInt();
-        imagem = in.readInt();
-        descrição = in.readString();
-    }
-
-    public static final Creator<Produto> CREATOR = new Creator<Produto>() {
-        @Override
-        public Produto createFromParcel(Parcel in) {
-            return new Produto(in);
-        }
-
-        @Override
-        public Produto[] newArray(int size) {
-            return new Produto[size];
-        }
-    };
 
     public String getId() {
         return id;
@@ -72,10 +61,6 @@ public class Produto implements Parcelable {
         return preco;
     }
 
-    public void setPreco(float preco) {
-        this.preco = preco;
-    }
-
     public int getQuantidade() {
         return quantidade;
     }
@@ -92,28 +77,36 @@ public class Produto implements Parcelable {
         this.imagem = imagem;
     }
 
-    public String getDescrição() {
-        return descrição;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getCodigoBarras() {
+        return codigoBarras;
+    }
+
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 
     @Override
-    public int describeContents() {
-        return 0;
+    public String toString() {
+        return "Produto{" +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
+                ", preco=" + preco +
+                ", quantidade=" + quantidade +
+                ", imagem=" + imagem +
+                ", descricao='" + descricao + '\'' +
+                ", codigoBarras='" + codigoBarras + '\'' +
+                '}';
     }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
-        parcel.writeString(nome);
-        parcel.writeDouble(preco);
-        parcel.writeInt(quantidade);
-        parcel.writeInt(imagem);
-        parcel.writeString(descrição);
-    }
-
-
 }

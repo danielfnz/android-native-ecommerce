@@ -8,11 +8,12 @@
     android:layout_height="fill_parent"
     tools:context="danielfnz.com.br.ecommerce.activity.Ecommerce">
 
-    <Button
-        android:id="@+id/botao"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="click" />
+        android:background="@color/colorPrimary"/>
+
 
     <ListView
         android:id="@+id/lista"
@@ -21,14 +22,4 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
 
-    <TextView
-        android:id="@+id/list_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:text="Ops, a lista de produtos está vazia"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="244dp" />
 </LinearLayout >

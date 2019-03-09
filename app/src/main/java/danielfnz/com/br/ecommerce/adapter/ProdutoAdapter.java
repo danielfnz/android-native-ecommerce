@@ -1,17 +1,23 @@
 package danielfnz.com.br.ecommerce.adapter;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import danielfnz.com.br.ecommerce.R;
 import danielfnz.com.br.ecommerce.model.Produto;
+import danielfnz.com.br.ecommerce.util.Util;
+
+import static danielfnz.com.br.ecommerce.util.Util.CIFRA_DINHEIRO;
 
 /**
  * Created by Alunoinf_2 on 02/02/2019.
@@ -20,9 +26,9 @@ import danielfnz.com.br.ecommerce.model.Produto;
 public class ProdutoAdapter  extends ArrayAdapter<Produto> {
 
     private final Context context;
-    private final ArrayList<Produto> elementos;
+    private final List<Produto> elementos;
 
-    public ProdutoAdapter(Context context, ArrayList<Produto>elementos){
+    public ProdutoAdapter(Context context, List<Produto>elementos){
         super(context, R.layout.item, elementos);
         this.context = context;
         this.elementos = elementos;
@@ -40,9 +46,10 @@ public class ProdutoAdapter  extends ArrayAdapter<Produto> {
         ImageView imagem = (ImageView) rowView.findViewById(R.id.imagem);
 
         nomeProduto.setText(elementos.get(position).getNome());
-        preco.setText(Double.toString(elementos.get(position).getPreco()));
+        preco.setText(new StringBuilder(CIFRA_DINHEIRO).append(Util.formataVirgula(elementos.get(position).getPreco())).toString());
         qtdEstoque.setText(Integer.toString(elementos.get(position).getQuantidade()) + " em estoque");
-        imagem.setImageResource(elementos.get(position).getImagem());
+        imagem.setLayoutParams(new RelativeLayout.LayoutParams(Util.dpToPx(context, 60),Util.dpToPx(context, 60)));
+        //imagem.setImageResource(elementos.get(position).getImagem());
 
 
         return rowView;

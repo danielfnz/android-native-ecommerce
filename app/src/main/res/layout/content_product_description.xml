@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="danielfnz.com.br.ecommerce.activity.ProductDescription"
+    tools:context="danielfnz.com.br.ecommerce.context.ProductDescription"
     tools:showIn="@layout/activity_product_description"
     android:background="@color/colorWhite">
 

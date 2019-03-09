@@ -1,8 +1,12 @@
 package danielfnz.com.br.ecommerce.fragment;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +15,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-import java.text.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import danielfnz.com.br.ecommerce.R;
-import danielfnz.com.br.ecommerce.model.Produto;
+import danielfnz.com.br.ecommerce.activity.CarrinhoActivity;
+import danielfnz.com.br.ecommerce.model.ItemCarrinho;
+import danielfnz.com.br.ecommerce.model.ProdutoParcel;
+import danielfnz.com.br.ecommerce.util.Util;
 
 import static danielfnz.com.br.ecommerce.util.Util.CIFRA_DINHEIRO;
 import static danielfnz.com.br.ecommerce.util.Util.formataVirgula;
@@ -27,7 +40,7 @@ public class CompraProdutoDescricaoFragment extends Fragment {
 
     EditText editQuantidadeDeItens;
     TextView valorTotal;
-    Produto produto;
+    ProdutoParcel produtoParcel;
 
     public CompraProdutoDescricaoFragment() {
         // Required empty public constructor
@@ -40,10 +53,10 @@ public class CompraProdutoDescricaoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_compra_produto_descricao, container, false);
 
-        produto = getArguments().getParcelable("produto");
+        produtoParcel = getArguments().getParcelable("produto");
 
         TextView preco = (TextView) view.findViewById(R.id.precoProdutoDetalhe);
-                valorTotal = (TextView) view.findViewById(R.id.valorTotalProdutoDetalhe);
+        valorTotal = (TextView) view.findViewById(R.id.valorTotalProdutoDetalhe);
 
         editQuantidadeDeItens = (EditText) view.findViewById(R.id.editQuantidadeDeItens);
         editQuantidadeDeItens.setText("1");
@@ -53,8 +66,8 @@ public class CompraProdutoDescricaoFragment extends Fragment {
                 botaoLancarItem = (Button) view.findViewById(R.id.adicionarProdutoNoCarrinho);
 
 
-        preco.setText(new StringBuilder(CIFRA_DINHEIRO).append(formataVirgula(produto.getPreco())));
-        valorTotal.setText(new StringBuilder(CIFRA_DINHEIRO).append(formataVirgula(produto.getPreco())));
+        preco.setText(new StringBuilder(CIFRA_DINHEIRO).append(formataVirgula(produtoParcel.getPreco())));
+        valorTotal.setText(new StringBuilder(CIFRA_DINHEIRO).append(formataVirgula(produtoParcel.getPreco())));
 
         botaoDiminuirQuantidadeItens.setOnClickListener(diminuirUmItem());
         botaoAumentarQuantidadeItens.setOnClickListener(aumentarUmItem());
@@ -67,7 +80,25 @@ public class CompraProdutoDescricaoFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ItemCarrinho itemCarrinho = new ItemCarrinho(produtoParcel.getNome(),
+                        Integer.parseInt(editQuantidadeDeItens.getText().toString()), produtoParcel.getPreco(),
+                        (Util.convertToNumber(valorTotal.getText().toString())), produtoParcel.getImagem());
 
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("carrinho_preferences", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                Gson gson = new Gson();
+                String listaExistente = sharedPreferences.getString("carrinho_list", null);
+                Type type = new TypeToken<ArrayList<ItemCarrinho>>() {}.getType();
+                List<ItemCarrinho> listaItens = new ArrayList<>();
+                if(listaExistente != null) {
+                    listaItens.addAll((Collection<? extends ItemCarrinho>) gson.fromJson(listaExistente, type));
+                }
+                Log.i("testando", listaItens.toString());
+                listaItens.add(itemCarrinho);
+                editor.putString("carrinho_list", gson.toJson(listaItens));
+                editor.apply();
+                getActivity().startActivity(new Intent(getActivity(), CarrinhoActivity.class));
+                getActivity().finish();
             }
         };
     }
@@ -87,7 +118,6 @@ public class CompraProdutoDescricaoFragment extends Fragment {
     }
 
 
-
     private View.OnClickListener aumentarUmItem() {
         return new View.OnClickListener() {
             @Override
@@ -99,7 +129,7 @@ public class CompraProdutoDescricaoFragment extends Fragment {
     }
 
     private void recalculaValores() {
-         valorTotal.setText(new StringBuilder(CIFRA_DINHEIRO).append(formataVirgula(produto.getPreco() * Integer.parseInt(editQuantidadeDeItens.getText().toString()))).toString());
+        valorTotal.setText(new StringBuilder(CIFRA_DINHEIRO).append(formataVirgula(produtoParcel.getPreco() * Integer.parseInt(editQuantidadeDeItens.getText().toString()))).toString());
     }
 
 }

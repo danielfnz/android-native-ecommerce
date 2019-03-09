@@ -4,4 +4,6 @@
 
     <item android:id="@+id/abrirLeitor" android:icon="@drawable/ic_center_focus_weak_black_24dp" android:title="" app:showAsAction="always"/>
 
+    <item android:id="@+id/abrirCarrinho" android:icon="@drawable/ic_shopping_cart_black_24dp" android:title="" app:showAsAction="always"/>
+
 </menu>
